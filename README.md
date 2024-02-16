@@ -35,7 +35,7 @@ SUPABASE_URL=Your_Supabase_Project_URL
 To start the server, run:
 
 ```pash
-npm start
+npm run dev
 ```
 
 ## Resources

@@ -9,6 +9,13 @@ body {
   padding: 20px;
 }
 
+#main-container {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto;
+  padding-top: 50px;
+}
 h1 {
   color: #284b63;
   text-align: center;
@@ -51,13 +58,14 @@ button:hover {
   padding: 10px;
   background-color: #f7f7f7;
   border: 1px solid #ddd;
+  display: none;
   border-radius: 4px;
 }
 
 .history-entry {
   padding: 5px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #eaeaea; 
+  border-bottom: 1px solid #eaeaea;
 }
 
 .icon {

@@ -1,5 +1,3 @@
-// /path/to/index.js
-
 const form = document.getElementById("form-el")
 const input = document.getElementById("input-el")
 const reply = document.getElementById("reply-el")
@@ -7,7 +5,10 @@ const historyContainer = document.getElementById("history-container")
 
 form.addEventListener("submit", function (e) {
   e.preventDefault()
-  main(input.value)
+  // Check if input is not empty and not just whitespace before calling main()
+  if (input.value.trim()) {
+    main(input.value)
+  }
 })
 
 async function main(question) {
@@ -26,6 +27,7 @@ async function main(question) {
     }
     const data = await response.json()
     reply.innerHTML = "" // Clear the "Thinking..." message
+    document.getElementById("history-container").style.display = "block"
     keepHistory(question, data.answer) // Append the question and its answer to the history
   } catch (error) {
     reply.innerHTML = "Error: " + error.message
