@@ -45,3 +45,7 @@ npm start
 
 - To get `OpenAI API KEY`
 [OpneAI API Documentation](https://platform.openai.com/docs/overview)
+
+## Screenshot
+
+![ai assistant](./public/ai_prp_assistant.png)
