@@ -1,3 +1,5 @@
+<!-- /path/to/index.html -->
+
 <!doctype html>
 <html>
 
@@ -12,18 +14,18 @@
 </head>
 
 <body>
-
     <h1>
         PRP AI Assistant
         <span class="icon material-symbols-outlined">chat_bubble</span>
     </h1>
-    <form>
-        <input type="text" placeholder="How can I help?">
+    <form id="form-el">
+        <input id="input-el" type="text" placeholder="How can I help?">
         <button>
             <span class="icon material-symbols-outlined">send</span>
         </button>
     </form>
-    <p class="reply"></p>
+    <div id="history-container"></div>
+    <p class="reply" id="reply-el"></p>
     <script src="index.js"></script>
 </body>
 

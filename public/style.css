@@ -2,17 +2,17 @@ html,
 body {
   margin: 0;
   padding: 0;
-}
-
-h1 {
   font-family: "Signika Negative", sans-serif;
-  color: #284b63;
-  text-align: center;
-  font-size: 2.25rem;
 }
 
 body {
   padding: 20px;
+}
+
+h1 {
+  color: #284b63;
+  text-align: center;
+  font-size: 2.25rem;
 }
 
 form {
@@ -46,6 +46,20 @@ button:hover {
   background-color: #416e8d;
 }
 
+#history-container {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.history-entry {
+  padding: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eaeaea; 
+}
+
 .icon {
   font-size: 1.75rem;
 }
@@ -53,4 +67,5 @@ button:hover {
 .reply {
   font-size: 1.15rem;
   line-height: 1.5;
+  font-family: "Signika Negative", sans-serif;
 }

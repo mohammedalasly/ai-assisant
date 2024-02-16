@@ -45,15 +45,31 @@ server.post("/ask-prp", async (req, res) => {
       messages: [
         {
           role: "user",
-          content: `${context} Based on this information, answer the question: ${question}`,
+          content: `${context} You are a PRP AI Assistant, 
+          helping people with answering thier quesions on PRP treatments, 
+          based on this information, 
+          answer the question, if you coludn't find the answer, 
+          do your best: ${question}`,
         },
       ],
       stream: true,
     })
+
+    let responseContent = ""
     for await (const chunk of stream) {
-      process.stdout.write(chunk.choices[0]?.delta?.content || "")
+      if (chunk.choices && chunk.choices.length > 0 && chunk.choices[0].delta) {
+        responseContent += chunk.choices[0].delta.content || ""
+      }
     }
-    res.json({ answer: stream.data.choices[0].content.trim() })
+
+    // Trim the response content and ensure it's not undefined or null
+    responseContent = responseContent.trim()
+    if (!responseContent) {
+      responseContent = "No answer was provided by the AI."
+    }
+
+    // Send the response content back to the client
+    res.json({ answer: responseContent })
   } catch (error) {
     console.error("Error in OpenAI request:", error.message)
     res.status(500).json({ error: "Failed to process the question." })
@@ -68,6 +84,3 @@ server.get("/", (req, res) => {
 server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`)
 })
-
-
-// Question to ask: Are There Any Side Effects?

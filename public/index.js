@@ -1,33 +1,40 @@
-const form = document.querySelector("form")
-const input = document.querySelector("input")
-const reply = document.querySelector(".reply")
+// /path/to/index.js
+
+const form = document.getElementById("form-el")
+const input = document.getElementById("input-el")
+const reply = document.getElementById("reply-el")
+const historyContainer = document.getElementById("history-container")
 
 form.addEventListener("submit", function (e) {
   e.preventDefault()
   main(input.value)
-  input.value = ""
 })
 
-async function main(input) {
+async function main(question) {
+  reply.innerHTML = "Thinking..."
+  input.value = ""
   try {
-    reply.innerHTML = "Thinking..."
     const response = await fetch("http://localhost:3000/ask-prp", {
-      // Adjust URL if needed
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ question: input }),
+      body: JSON.stringify({ question }),
     })
-
     if (!response.ok) {
-      throw new Error("Network response was not ok")
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
-
     const data = await response.json()
-    reply.innerHTML = data.answer
+    reply.innerHTML = "" // Clear the "Thinking..." message
+    keepHistory(question, data.answer) // Append the question and its answer to the history
   } catch (error) {
-    console.error("Error in main function:", error.message)
-    reply.innerHTML = "Sorry, something went wrong. Please try again."
+    reply.innerHTML = "Error: " + error.message
   }
+}
+
+function keepHistory(question, answer) {
+  const historyEntry = document.createElement("div")
+  historyEntry.classList.add("history-entry")
+  historyEntry.innerHTML = `${question} <br><br> ${answer}`
+  historyContainer.appendChild(historyEntry)
 }
